@@ -7,6 +7,6 @@ Esta URI retorna uma lista paginada dos repositórios, ordenados por popularidad
 Ao tocar em um item, o app leva a lista de Pull Requests do repositório. URI: https://api.github.com/repos/"nome do usuário"/"nome do repositório"/pulls
 Ao tocar em um item, o app abre no browser a página do Pull Request em questão.
 
-
+![](https://drive.google.com/file/d/1rfurJF3QFF1AS775bV-Sybq-3381LXJP/view?usp=sharing)
 
 
