@@ -37,6 +37,10 @@ public class Repository implements Serializable {
   @SerializedName("pulls_url")
   private String pullsUrl;
 
+  public Repository() {
+    this.owner = new Owner();
+  }
+
   public Integer getId() {
     return id;
   }

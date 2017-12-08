@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.desafiosafaty.angelorobson.R;
 import com.desafiosafaty.angelorobson.adapter.PullRequestAdapter;
 import com.desafiosafaty.angelorobson.contract.PullRequestContract;
+import com.desafiosafaty.angelorobson.dao.RepositoryDAO;
 import com.desafiosafaty.angelorobson.listener.EndlessRecyclerOnScrollListener;
 import com.desafiosafaty.angelorobson.listener.RecyclerItemClickListener;
 import com.desafiosafaty.angelorobson.model.PullRequest;
@@ -61,6 +62,8 @@ public class PullRequestFragment extends Fragment implements PullRequestContract
   GitHubService mGitHubService;
   Repository repository;
 
+  RepositoryDAO repositoryDAO;
+
   PullRequestPresenter pullRequestPresenter;
 
   public PullRequestFragment() {
@@ -72,6 +75,8 @@ public class PullRequestFragment extends Fragment implements PullRequestContract
                            Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.pull_resquest_fragment, container, false);
     unbinder = ButterKnife.bind(this, view);
+
+    repositoryDAO = new RepositoryDAO(getActivity());
 
     ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -99,7 +104,7 @@ public class PullRequestFragment extends Fragment implements PullRequestContract
   @Override
   public void onResume () {
     super.onResume();
-    repository = getRepository();
+    repository = repositoryDAO.getRepository();
     pullRequestPresenter.getPullsRequests(repository.getOwner().getLogin(), repository.getName(), INITIAL_PAGE);
     getActivity().setTitle(repository.getName());
   }
@@ -148,14 +153,6 @@ public class PullRequestFragment extends Fragment implements PullRequestContract
   private void openPullRequestInBrowser(String pullRequestUrl) {
     Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse(pullRequestUrl));
     startActivity(intent);
-  }
-
-  private Repository getRepository(){
-    Gson gson = new Gson();
-    SharedPreferences mPrefs =  getActivity().getPreferences(MODE_PRIVATE);
-
-    String RepositoryJson = mPrefs.getString(REPOSITORY, "");
-    return gson.fromJson(RepositoryJson, Repository.class);
   }
 
   private void callRepositoryFragment() {

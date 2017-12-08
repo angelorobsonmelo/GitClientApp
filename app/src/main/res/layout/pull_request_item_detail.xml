@@ -38,14 +38,14 @@
           android:layout_marginTop="10dp"
           android:textStyle="bold"
           android:textSize="18sp"
-          android:text="Title" />
+          android:text="@string/title" />
 
         <TextView
           android:id="@+id/textDataCreated"
           android:layout_marginTop="4dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="created at 27-12-2017"
+          android:text="@string/create_at"
           android:textAlignment="viewStart"
           android:textColor="#e29f32"
           android:textStyle="bold" />
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textSize="18sp"
-        android:text="Body" />
+        android:text="@string/body" />
 
     </LinearLayout>
   </LinearLayout>

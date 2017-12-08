@@ -64,9 +64,9 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
     TextView textRepository;
     @BindView(R.id.textDescription)
     TextView textDescription;
-    @BindView(R.id.TextFork)
+    @BindView(R.id.textFork)
     TextView texFork;
-    @BindView(R.id.TextStar)
+    @BindView(R.id.textStar)
     TextView textStar;
 
 

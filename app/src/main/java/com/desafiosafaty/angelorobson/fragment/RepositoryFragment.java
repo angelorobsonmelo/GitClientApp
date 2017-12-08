@@ -1,7 +1,6 @@
 package com.desafiosafaty.angelorobson.fragment;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,13 +19,13 @@ import android.widget.Toast;
 import com.desafiosafaty.angelorobson.R;
 import com.desafiosafaty.angelorobson.adapter.RepositoryAdapter;
 import com.desafiosafaty.angelorobson.contract.RepositoryContract;
+import com.desafiosafaty.angelorobson.dao.RepositoryDAO;
 import com.desafiosafaty.angelorobson.listener.EndlessRecyclerOnScrollListener;
 import com.desafiosafaty.angelorobson.listener.RecyclerItemClickListener;
 import com.desafiosafaty.angelorobson.model.Repository;
 import com.desafiosafaty.angelorobson.presenter.RepositoryPresenter;
 import com.desafiosafaty.angelorobson.service.GitHubService;
 import com.desafiosafaty.angelorobson.service.ServiceGenerator;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +34,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import static android.content.Context.MODE_PRIVATE;
-import static android.content.SharedPreferences.Editor;
 import static android.support.v7.widget.RecyclerView.LayoutManager;
 import static com.desafiosafaty.angelorobson.constants.Constants.INITIAL_PAGE;
 import static com.desafiosafaty.angelorobson.constants.Constants.REPOSITORIES;
-import static com.desafiosafaty.angelorobson.constants.Constants.REPOSITORY;
 
 public class RepositoryFragment extends Fragment implements RepositoryContract.View {
 
@@ -64,6 +60,8 @@ public class RepositoryFragment extends Fragment implements RepositoryContract.V
 
   RepositoryPresenter repositoryPresenter;
 
+  RepositoryDAO repositoryDAO;
+
   public RepositoryFragment() {
   }
 
@@ -78,6 +76,8 @@ public class RepositoryFragment extends Fragment implements RepositoryContract.V
     mGitHubService = ServiceGenerator.createService(GitHubService.class);
 
     repositoryPresenter = new RepositoryPresenter(this, mGitHubService, mProgressBar);
+
+    repositoryDAO = new RepositoryDAO(getActivity());
 
     getActivity().setTitle(REPOSITORIES);
 
@@ -97,7 +97,6 @@ public class RepositoryFragment extends Fragment implements RepositoryContract.V
   }
 
   private void initConfigurationRecyclerView() {
-    repositoryAdapter = new RepositoryAdapter(repositories);
     repositoryAdapter = new RepositoryAdapter(repositories);
     mLayoutManager = new LinearLayoutManager(getContext());
     mRecyclerView.setLayoutManager(mLayoutManager);
@@ -123,7 +122,7 @@ public class RepositoryFragment extends Fragment implements RepositoryContract.V
         new RecyclerItemClickListener.OnItemClickListener() {
           @Override
           public void onItemClick(View view, int position) {
-            saveRepository(repositories.get(position));
+            repositoryDAO.save(repositories.get(position));
             callFragmentPullRequest();
           }
 
@@ -147,17 +146,6 @@ public class RepositoryFragment extends Fragment implements RepositoryContract.V
     transaction.replace(R.id.frameConteiner, pullRequestFragment);
     transaction.addToBackStack(null);
     transaction.commit();
-  }
-
-  private void saveRepository(Repository repository){
-    SharedPreferences mPrefs = getActivity().getPreferences(MODE_PRIVATE);
-    Editor prefsEditor = mPrefs.edit();
-
-    Gson gson = new Gson();
-    String RepositoryJson = gson.toJson(repository);
-
-    prefsEditor.putString(REPOSITORY, RepositoryJson);
-    prefsEditor.apply();
   }
 
   @Override

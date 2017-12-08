@@ -38,7 +38,7 @@
         android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:textSize="23sp"
-        android:text="Viagem Layout Legal" />
+        android:text="@string/name_repository" />
 
       </LinearLayout>
       <TextView
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textSize="18sp"
-        android:text="Viagem Layout Legal" />
+        android:text="@string/description_repository" />
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -55,20 +55,20 @@
         android:orientation="horizontal">
 
         <TextView
-          android:id="@+id/TextFork"
+          android:id="@+id/textFork"
           style="?attr/buttonBarButtonStyle"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:drawableLeft="@drawable/ic_github_fork"
-          android:text="Forks"
+          android:text="@string/forks"
           android:textAlignment="textStart"
           android:textColor="#e29f32"
           android:textSize="16sp"
           android:textStyle="bold" />
 
         <TextView
-          android:id="@+id/TextStar"
+          android:id="@+id/textStar"
           style="?attr/buttonBarButtonStyle"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
 
           android:textStyle="bold"
           android:textSize="16sp"
-          android:text="Stars" />
+          android:text="@string/stars" />
       </LinearLayout>
     </LinearLayout>
   </LinearLayout>
