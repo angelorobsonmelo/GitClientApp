@@ -4,11 +4,9 @@ import com.desafiosafaty.angelorobson.model.Repository;
 
 import java.util.List;
 
-public interface RepositoryContract
-{
+public interface RepositoryContract {
 
-    interface View
-    {
+    interface View {
 
         void showRepositories(List<Repository> repositories);
 

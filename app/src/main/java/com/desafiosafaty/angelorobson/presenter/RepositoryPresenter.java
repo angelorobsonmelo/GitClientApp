@@ -14,28 +14,25 @@ import retrofit2.Response;
 import static com.desafiosafaty.angelorobson.constants.Constants.QUERY;
 import static com.desafiosafaty.angelorobson.constants.Constants.SORT_BY;
 
-public class RepositoryPresenter
-{
+public class RepositoryPresenter {
+
   private final RepositoryContract.View repositoryView;
   private final GitHubService service;
   private final ProgressBar mProgressBar;
 
-  public RepositoryPresenter (RepositoryContract.View repositoryView, GitHubService service, ProgressBar mProgressBar)
-  {
+  public RepositoryPresenter (RepositoryContract.View repositoryView, GitHubService service, ProgressBar mProgressBar) {
     this.repositoryView = repositoryView;
     this.service = service;
     this.mProgressBar = mProgressBar;
   }
 
-  public void getRepositories (int page)
-  {
+  public void getRepositories (int page) {
     mProgressBar.setVisibility(View.VISIBLE);
 
     service.getRepositories(QUERY, SORT_BY, page).enqueue(new Callback<GitHubSearchResult>() {
 
       @Override
-      public void onResponse(Call<GitHubSearchResult> call, Response<GitHubSearchResult> response)
-      {
+      public void onResponse(Call<GitHubSearchResult> call, Response<GitHubSearchResult> response) {
         if (response.isSuccessful()) {
           repositoryView.showRepositories(response.body().getRepositories());
           mProgressBar.setVisibility(View.GONE);

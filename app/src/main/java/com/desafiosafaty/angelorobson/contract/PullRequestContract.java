@@ -4,11 +4,9 @@ import com.desafiosafaty.angelorobson.model.PullRequest;
 
 import java.util.List;
 
-public interface PullRequestContract
-{
+public interface PullRequestContract {
 
-    interface View
-    {
+    interface View {
 
         void showPullsRequest(List<PullRequest> pullRequests);
 

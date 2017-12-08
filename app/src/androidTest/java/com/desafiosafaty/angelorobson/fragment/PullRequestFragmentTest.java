@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.desafiosafaty.angelorobson.R;
@@ -51,10 +50,7 @@ public class PullRequestFragmentTest extends ActivityInstrumentationTestCase2<Ma
   @UiThreadTest
   public void testFirstObjectExists() throws Exception {
     View item = getItem(0);
-
-    TextView body = item.findViewById(R.id.textBody);
-
-    assertNotNull(body.getText().toString());
+    assertNotNull(item);
   }
 
   @UiThreadTest

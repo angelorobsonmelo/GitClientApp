@@ -108,8 +108,8 @@ public class RepositoryFragment extends Fragment implements RepositoryContract.V
   private void initEndlessScrollListener() {
     mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener((LinearLayoutManager) mLayoutManager) {
       @Override
-      public void onLoadMore(int current_page) {
-        repositoryPresenter.getRepositories(current_page);
+      public void onLoadMore(int currentPage) {
+        repositoryPresenter.getRepositories(currentPage);
       }
     });
   }

@@ -13,21 +13,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PullRequestPresenter
-{
+public class PullRequestPresenter {
+
   private final PullRequestContract.View pullRequestContractView;
   private final GitHubService service;
   private final ProgressBar mProgressBar;
 
-  public PullRequestPresenter(PullRequestContract.View pullRequestContractView, GitHubService service, ProgressBar mProgressBar)
-  {
+  public PullRequestPresenter(PullRequestContract.View pullRequestContractView, GitHubService service, ProgressBar mProgressBar) {
     this.pullRequestContractView = pullRequestContractView;
     this.service = service;
     this.mProgressBar = mProgressBar;
   }
 
-  public void getPullsRequests (String login, final String repository, int page)
-  {
+  public void getPullsRequests (String login, final String repository, int page) {
     mProgressBar.setVisibility(View.VISIBLE);
 
     service.getPullsRequests(login, repository, page).enqueue(new Callback<List<PullRequest>>() {

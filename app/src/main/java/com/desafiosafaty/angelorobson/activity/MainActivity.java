@@ -9,15 +9,12 @@ import com.desafiosafaty.angelorobson.fragment.RepositoryFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-   private RepositoryFragment repositoryFragment;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    repositoryFragment = new RepositoryFragment();
-
+    RepositoryFragment repositoryFragment = new RepositoryFragment();
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(R.id.frameConteiner, repositoryFragment);
     transaction.commit();

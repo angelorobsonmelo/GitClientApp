@@ -121,8 +121,8 @@ public class PullRequestFragment extends Fragment implements PullRequestContract
   private void initEndlessScrollListener() {
     mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener((LinearLayoutManager) mLayoutManager) {
       @Override
-      public void onLoadMore(int current_page) {
-        pullRequestPresenter.getPullsRequests(repository.getOwner().getLogin(), repository.getName(), current_page);
+      public void onLoadMore(int currentPage) {
+        pullRequestPresenter.getPullsRequests(repository.getOwner().getLogin(), repository.getName(), currentPage);
       }
     });
   }
